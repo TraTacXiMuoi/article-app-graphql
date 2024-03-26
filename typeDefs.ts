@@ -8,9 +8,16 @@ export const typeDefs = gql`
     description: String
   }
 
+  type Category {
+    id: ID,
+    title: String,
+    avatar: String
+  }
+
   type Query {
     hello: String,
-    getListArticle: [Article]
+    getListArticle: [Article],
+    getListCategory: [Category]
   }
 
   input ArticleInput {
