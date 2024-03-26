@@ -54,6 +54,15 @@ export const resolvers = {
       }); 
 
       return newData;
-    }
+    },
+
+    createCategory: async (_, args) => {
+      const { category } = args;
+
+      const record = new Category(category);
+      await record.save();
+
+      return record;
+    },
   }
 }
