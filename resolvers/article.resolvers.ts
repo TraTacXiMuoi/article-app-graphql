@@ -9,8 +9,14 @@ export const resolversArticle = {
         sortKey,
         sortValue,
         currentPage,
-        limitItems
+        limitItems,
+        filterKey,
+        filterValue
       } = args;
+
+      const find = {
+        deleted: false
+      };
 
       // Sort
       const sort = {};
@@ -24,9 +30,13 @@ export const resolversArticle = {
       const skip = (currentPage - 1) * limitItems;
       // End Pagination
 
-      const articles = await Article.find({
-        deleted: false
-      })
+      // Filter
+      if(filterKey && filterValue) {
+        find[filterKey] = filterValue;
+      }
+      // End Filter
+
+      const articles = await Article.find(find)
         .sort(sort)
         .limit(limitItems)
         .skip(skip);
